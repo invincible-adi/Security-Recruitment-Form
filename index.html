@@ -100,7 +100,7 @@
         .error-message {
             color: #dc3545;
             font-size: 0.875rem;
-            margin-top: 0.25rem;
+            margin-bottom: 1rem;
             display: block;
             font-weight: 500;
             position: absolute;
@@ -113,7 +113,7 @@
 
         .form-group {
             position: relative;
-            margin-bottom: 1.5rem;
+            /* margin-bottom: 1rem; */
         }
 
         .invalid-feedback {
@@ -365,7 +365,7 @@
         .col-md-6,
         .col-md-4 {
             position: relative;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .camera-buttons {
@@ -509,7 +509,7 @@
                 <!-- Step 1: Personal Details -->
                 <div class="form-step active" id="step-1">
                     <h4 class="mb-3">Personal</h4>
-                    <div class="row g-3">
+                    <div class="row">
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label class="form-label required-field">Name</label>
@@ -1405,11 +1405,11 @@
                         </div>
                     </div>
 
-                    <div class="preview-buttons">
-                        <button class="btn btn-primary" onclick="downloadPDF()">
+                    <div class="preview-buttons d-flex justify-content-center">
+                        <button class="btn btn-primary me-1" onclick="downloadPDF()">
                             <i class="fas fa-download"></i> Download Application
                         </button>
-                        <button class="btn btn-secondary" onclick="editForm()">
+                        <button class="btn btn-secondary me-1" onclick="editForm()">
                             <i class="fas fa-edit"></i> Edit Form
                         </button>
                         <button class="btn btn-success" onclick="submitForm()">
