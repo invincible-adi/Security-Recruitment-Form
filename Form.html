@@ -1,0 +1,397 @@
+<!--
+  Multi-step Security Recruitment Form (English Version)
+  - Full width, Bootstrap styled
+  - 3 pages/steps
+  - All fields from provided image
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A J Securitas Recruitment Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            min-height: 100vh;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.7s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 35px 40px 30px 40px;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+            border: 1.5px solid #e3e3e3;
+        }
+
+        .form-container h2 {
+            background: linear-gradient(90deg, #0072ff 0%, #00c6ff 100%);
+            color: #fff;
+            padding: 16px 0 16px 0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+            letter-spacing: 1px;
+        }
+
+        .form-step h4 {
+            color: #0072ff;
+            font-weight: 600;
+            margin-bottom: 22px;
+        }
+
+        label.form-label {
+            color: #0a2540;
+            font-weight: 500;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 8px;
+            border: 1.5px solid #b2d8f7;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #0072ff;
+            box-shadow: 0 0 0 2px #b2e0ff55;
+        }
+
+        .passport-photo-preview {
+            width: 120px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid #0072ff;
+            margin-top: 10px;
+            border-radius: 8px;
+            background: #f4faff;
+        }
+
+        .btn-primary,
+        .btn-success {
+            background: linear-gradient(90deg, #0072ff 0%, #00c6ff 100%);
+            border: none;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: box-shadow 0.2s;
+        }
+
+        .btn-primary:hover,
+        .btn-success:hover {
+            box-shadow: 0 4px 16px 0 #00c6ff44;
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #0072ff;
+            border: 1.5px solid #0072ff;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #0072ff;
+            color: #fff;
+        }
+
+        .alert-info {
+            background: linear-gradient(90deg, #e0eafc 0%, #cfdef3 100%);
+            color: #0a2540;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        /* Progress bar */
+        .progressbar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 35px;
+            counter-reset: step;
+        }
+
+        .progressbar li {
+            list-style-type: none;
+            width: 100%;
+            position: relative;
+            text-align: center;
+            color: #b2d8f7;
+            font-weight: 500;
+        }
+
+        .progressbar li:before {
+            content: counter(step);
+            counter-increment: step;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            border: 2px solid #b2d8f7;
+            display: block;
+            text-align: center;
+            margin: 0 auto 8px auto;
+            border-radius: 50%;
+            background: #fff;
+            font-size: 1.1rem;
+        }
+
+        .progressbar li:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: #b2d8f7;
+            top: 16px;
+            left: -50%;
+            z-index: -1;
+        }
+
+        .progressbar li:first-child:after {
+            content: none;
+        }
+
+        .progressbar li.active {
+            color: #0072ff;
+        }
+
+        .progressbar li.active:before {
+            border-color: #0072ff;
+            background: linear-gradient(90deg, #0072ff 0%, #00c6ff 100%);
+            color: #fff;
+        }
+
+        .progressbar li.active+li:after {
+            background: linear-gradient(90deg, #0072ff 0%, #00c6ff 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="form-container">
+            <h2 class="text-center mb-4">A J Securitas Recruitment Form</h2>
+            <ul class="progressbar" id="progressbar">
+                <li class="active">Personal</li>
+                <li>Address</li>
+                <li>Qualification</li>
+            </ul>
+            <form id="recruitmentForm" enctype="multipart/form-data">
+                <!-- Step 1: Personal Details -->
+                <div class="form-step active" id="step-1">
+                    <h4 class="mb-3">Personal Details</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Father's Name</label>
+                            <input type="text" class="form-control" name="fatherName" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Mother's Name</label>
+                            <input type="text" class="form-control" name="motherName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Date of Birth / Age</label>
+                            <input type="date" class="form-control" name="dob" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Mobile Number</label>
+                            <input type="tel" class="form-control" name="mobile1" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Marital Status</label>
+                            <select class="form-select" name="maritalStatus" required>
+                                <option value="">Select</option>
+                                <option value="single">Single</option>
+                                <option value="married">Married</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Upload Passport Size Photo</label>
+                        <input type="file" class="form-control" name="photo" accept="image/*" id="photoInput" required>
+                        <img id="photoPreview" class="passport-photo-preview" src="#" alt="Preview"
+                            style="display:none;" />
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary" onclick="nextStep(1)">Next</button>
+                    </div>
+                </div>
+                <!-- Step 2: Address & Physical Details -->
+                <div class="form-step" id="step-2">
+                    <h4 class="mb-3">Address & Physical Details</h4>
+                    <div class="mb-3">
+                        <label class="form-label">Permanent Address (Village/Post/Police Station/District/State/Pin
+                            Code)</label>
+                        <input type="text" class="form-control mb-2" name="addressVillage" placeholder="Village">
+                        <input type="text" class="form-control mb-2" name="addressPost" placeholder="Post">
+                        <input type="text" class="form-control mb-2" name="addressThana" placeholder="Police Station">
+                        <input type="text" class="form-control mb-2" name="addressDistrict" placeholder="District">
+                        <input type="text" class="form-control mb-2" name="addressState" placeholder="State">
+                        <input type="text" class="form-control mb-2" name="addressPin" placeholder="Pin Code">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Correspondence Address (Locality/Post/Police
+                            Station/District/State/Pin Code)</label>
+                        <input type="text" class="form-control mb-2" name="corrAddressMohalla" placeholder="Locality">
+                        <input type="text" class="form-control mb-2" name="corrAddressPost" placeholder="Post">
+                        <input type="text" class="form-control mb-2" name="corrAddressThana"
+                            placeholder="Police Station">
+                        <input type="text" class="form-control mb-2" name="corrAddressDistrict" placeholder="District">
+                        <input type="text" class="form-control mb-2" name="corrAddressState" placeholder="State">
+                        <input type="text" class="form-control mb-2" name="corrAddressPin" placeholder="Pin Code">
+                        <input type="tel" class="form-control mb-2" name="mobile2" placeholder="Mobile Number">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Identification Mark on Body</label>
+                            <input type="text" class="form-control" name="identificationMark">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Physical Measurement (Height)</label>
+                            <input type="text" class="form-control" name="height">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nationality</label>
+                            <input type="text" class="form-control" name="nationality">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Chest</label>
+                            <input type="text" class="form-control" name="chest">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Caste</label>
+                            <input type="text" class="form-control" name="caste">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Back</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next</button>
+                    </div>
+                </div>
+                <!-- Step 3: Qualification & References -->
+                <div class="form-step" id="step-3">
+                    <h4 class="mb-3">Education, Experience & References</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Educational Qualification</label>
+                            <input type="text" class="form-control" name="education">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Previous Experience</label>
+                            <input type="text" class="form-control" name="experience">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nominee Name & Mobile Number</label>
+                        <input type="text" class="form-control mb-2" name="nomineeName" placeholder="Name">
+                        <input type="tel" class="form-control mb-2" name="nomineeMobile" placeholder="Mobile Number">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Two Reputed Persons from Your Village/City/Locality (Name, Address,
+                            Phone Number)</label>
+                        <input type="text" class="form-control mb-2" name="ref1" placeholder="Person 1">
+                        <input type="text" class="form-control mb-2" name="ref2" placeholder="Person 2">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-control" name="date" value="">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Signature</label>
+                        <input type="text" class="form-control" name="signature">
+                    </div>
+                    <div class="alert alert-info">
+                        Uniform Details - Shirt, Pant, Belt, Shoes, Cap, Lanyard, Flap, Jersey, Jacket
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Back</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Multi-step form navigation
+        function nextStep(current) {
+            document.getElementById('step-' + current).classList.remove('active');
+            document.getElementById('step-' + (current + 1)).classList.add('active');
+            updateProgressBar(current + 1);
+        }
+
+        function prevStep(current) {
+            document.getElementById('step-' + current).classList.remove('active');
+            document.getElementById('step-' + (current - 1)).classList.add('active');
+            updateProgressBar(current - 1);
+        }
+
+        // Passport photo preview
+        document.getElementById('photoInput').addEventListener('change', function (e) {
+            const [file] = e.target.files;
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (evt) {
+                    const img = document.getElementById('photoPreview');
+                    img.src = evt.target.result;
+                    img.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Update progress bar
+        function updateProgressBar(step) {
+            const steps = document.querySelectorAll('.progressbar li');
+            steps.forEach((el, index) => {
+                el.classList.remove('active');
+                if (index < step) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        // Optional: Prevent form submit for demo
+        document.getElementById('recruitmentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Form submitted successfully!');
+        });
+    </script>
+</body>
+
+</html>
