@@ -37,9 +37,9 @@
 
         .form-container {
             max-width: 900px;
-            margin: 40px auto;
+            margin: 20px auto;
             background: rgba(255, 255, 255, 0.95);
-            padding: 35px 40px 30px 40px;
+            padding: 20px;
             border-radius: 18px;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
             border: 1.5px solid #e3e3e3;
@@ -124,7 +124,7 @@
             color: #dc3545;
         }
 
-        .is-invalid ~ .invalid-feedback {
+        .is-invalid~.invalid-feedback {
             display: block;
         }
 
@@ -141,14 +141,51 @@
             box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
         }
 
+        .camera-container {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .camera-preview {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            object-fit: contain;
+        }
+
+        .document-preview {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #0072ff;
+            border-radius: 8px;
+            margin-top: 10px;
+            object-fit: contain;
+        }
+
         .passport-photo-preview {
-            width: 120px;
-            height: 150px;
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            aspect-ratio: 3/4;
             object-fit: cover;
             border: 2px solid #0072ff;
             margin-top: 10px;
             border-radius: 8px;
             background: #f4faff;
+        }
+
+        .signature-preview {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            aspect-ratio: 2/1;
+            object-fit: contain;
+            border: 2px solid #0072ff;
+            border-radius: 8px;
+            margin-top: 10px;
         }
 
         .btn-primary,
@@ -190,17 +227,19 @@
         .progressbar {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             counter-reset: step;
+            flex-wrap: wrap;
         }
 
         .progressbar li {
             list-style-type: none;
-            width: 100%;
+            width: 33.33%;
             position: relative;
             text-align: center;
             color: #b2d8f7;
             font-weight: 500;
+            padding: 0 5px;
         }
 
         .progressbar li:before {
@@ -253,7 +292,7 @@
             padding: 20px;
             background: #fff;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .preview-section h3 {
@@ -278,12 +317,31 @@
 
         .preview-photo {
             max-width: 150px;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 3/4;
+            object-fit: cover;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
 
+        .preview-document {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: contain;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+
         .preview-signature {
             max-width: 200px;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 2/1;
+            object-fit: contain;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
@@ -301,12 +359,139 @@
 
         .download-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,114,255,0.3);
+            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
         }
 
-        .col-md-6, .col-md-4 {
+        .col-md-6,
+        .col-md-4 {
             position: relative;
             margin-bottom: 2rem;
+        }
+
+        .camera-buttons {
+            margin-top: 10px;
+        }
+
+        .education-entry {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+        }
+
+        .education-entry:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        .remove-education {
+            color: #dc3545;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .form-container {
+                margin: 15px;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .form-container h2 {
+                font-size: 1.5rem;
+                padding: 12px 0;
+            }
+
+            .form-step h4 {
+                font-size: 1.2rem;
+            }
+
+            .row {
+                margin-left: -10px;
+                margin-right: -10px;
+            }
+
+            .col-md-6,
+            .col-md-4,
+            .col-12 {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .camera-container {
+                margin-top: 5px;
+            }
+
+            .camera-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .camera-buttons button {
+                width: 100%;
+                margin: 0 !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .form-container {
+                margin: 5px;
+                padding: 10px;
+            }
+
+            .form-container h2 {
+                font-size: 1.3rem;
+                padding: 10px 0;
+            }
+
+            .form-step h4 {
+                font-size: 1.1rem;
+            }
+
+            .form-label {
+                font-size: 0.9rem;
+            }
+
+            .form-control,
+            .form-select {
+                font-size: 0.9rem;
+                padding: 0.375rem 0.75rem;
+            }
+
+            .btn {
+                padding: 0.375rem 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .camera-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .camera-buttons button {
+                width: 100%;
+            }
+
+            .passport-photo-preview {
+                max-width: 120px;
+            }
+
+            .preview-photo {
+                max-width: 120px;
+            }
+
+            .preview-document {
+                max-height: 150px;
+            }
         }
     </style>
 </head>
@@ -324,121 +509,225 @@
                 <!-- Step 1: Personal Details -->
                 <div class="form-step active" id="step-1">
                     <h4 class="mb-3">Personal</h4>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Name</label>
-                            <input type="text" class="form-control" name="name" required>
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required-field">Name</label>
+                                <input type="text" class="form-control" name="name" required>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Father's Name</label>
-                            <input type="text" class="form-control" name="fatherName" required>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required-field">Father's Name</label>
+                                <input type="text" class="form-control" name="fatherName" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required-field">Mother's Name</label>
+                                <input type="text" class="form-control" name="motherName" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required-field">Date of Birth</label>
+                                <input type="date" class="form-control" name="dob" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required-field">Mobile Number</label>
+                                <input type="tel" class="form-control" name="mobile1" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required-field">Marital Status</label>
+                                <select class="form-select" name="maritalStatus" required>
+                                    <option value="">Select</option>
+                                    <option value="single">Single</option>
+                                    <option value="married">Married</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required-field">Nationality</label>
+                                <input type="text" class="form-control" name="nationality" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required-field">Caste</label>
+                                <select class="form-select" name="caste" required>
+                                    <option value="">Select</option>
+                                    <option value="General">General</option>
+                                    <option value="OBC">OBC</option>
+                                    <option value="SC">SC</option>
+                                    <option value="ST">ST</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required-field">Identification Mark on Body</label>
+                                <input type="text" class="form-control" name="identificationMark" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required-field">Physical Measurement (Height)</label>
+                                <input type="text" class="form-control" name="height" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required-field">Chest</label>
+                                <input type="text" class="form-control" name="chest" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required-field">Passport Size Photo</label>
+                                <div class="camera-container">
+                                    <video id="photoVideo" class="camera-preview" style="display: none;"></video>
+                                    <canvas id="photoCanvas" style="display: none;"></canvas>
+                                    <img id="photoPreview" class="passport-photo-preview" src="#" alt="Preview"
+                                        style="display:none;" />
+                                    <div class="camera-buttons">
+                                        <button type="button" class="btn btn-primary"
+                                            onclick="startCamera('photo')">Start Camera</button>
+                                        <button type="button" class="btn btn-success" onclick="capturePhoto('photo')"
+                                            style="display: none;">Capture</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Mother's Name</label>
-                            <input type="text" class="form-control" name="motherName" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Date of Birth</label>
-                            <input type="date" class="form-control" name="dob" required>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Mobile Number</label>
-                            <input type="tel" class="form-control" name="mobile1" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Marital Status</label>
-                            <select class="form-select" name="maritalStatus" required>
-                                <option value="">Select</option>
-                                <option value="single">Single</option>
-                                <option value="married">Married</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Nationality</label>
-                            <input type="text" class="form-control" name="nationality" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Caste</label>
-                            <select class="form-select" name="caste" required>
-                                <option value="">Select</option>
-                                <option value="General">General</option>
-                                <option value="OBC">OBC</option>
-                                <option value="SC">SC</option>
-                                <option value="ST">ST</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Identification Mark on Body</label>
-                            <input type="text" class="form-control" name="identificationMark" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Physical Measurement (Height)</label>
-                            <input type="text" class="form-control" name="height" required>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Chest</label>
-                            <input type="text" class="form-control" name="chest" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Upload Passport Size Photo</label>
-                            <input type="file" class="form-control" name="photo" accept="image/*" id="photoInput"
-                                capture="environment" required>
-                            <img id="photoPreview" class="passport-photo-preview" src="#" alt="Preview"
-                                style="display:none;" />
-                            <button type="button" class="btn btn-outline-primary mt-2" onclick="openCamera()">Take Photo
-                                </button>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
+                    <div class="btn-group-responsive mt-4">
                         <button type="button" class="btn btn-primary" onclick="validateStep(1)">Next</button>
                     </div>
                 </div>
                 <!-- Step 2: Other Details -->
                 <div class="form-step" id="step-2">
                     <h4 class="mb-3">Other Details</h4>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Aadhaar Number</label>
-                            <input type="text" class="form-control" name="aadhaar" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label required-field">PAN Number</label>
-                            <input type="text" class="form-control" name="pan" required>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-4">
-                            <label class="form-label required-field">Bank Account Number</label>
-                            <input type="text" class="form-control" name="bankAccount" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label required-field">IFSC Code</label>
-                            <input type="text" class="form-control" name="ifsc" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label required-field">Bank Name</label>
-                            <input type="text" class="form-control" name="bankName" required>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Bank Branch</label>
-                            <input type="text" class="form-control" name="bankBranch" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Experience (Optional)</label>
-                            <input type="text" class="form-control" name="experience">
+                    <div class="row">
+                        <!-- Left Column -->
+                        <div class="col-md-12">
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label required-field">Aadhaar Number</label>
+                                    <input type="text" class="form-control" name="aadhaar" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6 col-sm-12">
+                                    <label class="form-label required-field">Aadhaar Card (Front)</label>
+                                    <div class="camera-container">
+                                        <video id="aadhaarFrontVideo" class="camera-preview"
+                                            style="display: none;"></video>
+                                        <canvas id="aadhaarFrontCanvas" style="display: none;"></canvas>
+                                        <img id="aadhaarFrontPreview" class="document-preview" src="#"
+                                            alt="Aadhaar Front" style="display:none;" />
+                                        <div class="camera-buttons">
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="startCamera('aadhaarFront')">Start Camera</button>
+                                            <button type="button" class="btn btn-success"
+                                                onclick="capturePhoto('aadhaarFront')"
+                                                style="display: none;">Capture</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <label class="form-label required-field">Aadhaar Card (Back)</label>
+                                    <div class="camera-container">
+                                        <video id="aadhaarBackVideo" class="camera-preview"
+                                            style="display: none;"></video>
+                                        <canvas id="aadhaarBackCanvas" style="display: none;"></canvas>
+                                        <img id="aadhaarBackPreview" class="document-preview" src="#" alt="Aadhaar Back"
+                                            style="display:none;" />
+                                        <div class="camera-buttons">
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="startCamera('aadhaarBack')">Start Camera</button>
+                                            <button type="button" class="btn btn-success"
+                                                onclick="capturePhoto('aadhaarBack')"
+                                                style="display: none;">Capture</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label required-field">PAN Number</label>
+                                    <input type="text" class="form-control" name="pan" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label required-field">PAN Card</label>
+                                    <div class="camera-container" style="width: 50%; margin: 0 auto;">
+                                        <video id="panVideo" class="camera-preview" style="display: none;"></video>
+                                        <canvas id="panCanvas" style="display: none;"></canvas>
+                                        <img id="panPreview" class="document-preview" src="#" alt="PAN Card"
+                                            style="display:none;" />
+                                        <div class="camera-buttons">
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="startCamera('pan')">Start Camera</button>
+                                            <button type="button" class="btn btn-success" onclick="capturePhoto('pan')"
+                                                style="display: none;">Capture</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label required-field">Bank Account Number</label>
+                                    <input type="text" class="form-control" name="bankAccount" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label required-field">IFSC Code</label>
+                                    <input type="text" class="form-control" name="ifsc" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label required-field">Bank Name</label>
+                                    <input type="text" class="form-control" name="bankName" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label required-field">Bank Branch</label>
+                                    <input type="text" class="form-control" name="bankBranch" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label required-field">Bank Passbook</label>
+                                    <div class="camera-container" style="width: 50%; margin: 0 auto;">
+                                        <video id="passbookVideo" class="camera-preview" style="display: none;"></video>
+                                        <canvas id="passbookCanvas" style="display: none;"></canvas>
+                                        <img id="passbookPreview" class="document-preview" src="#" alt="Bank Passbook"
+                                            style="display:none;" />
+                                        <div class="camera-buttons">
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="startCamera('passbook')">Start Camera</button>
+                                            <button type="button" class="btn btn-success"
+                                                onclick="capturePhoto('passbook')"
+                                                style="display: none;">Capture</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label">Experience (Optional)</label>
+                                    <input type="text" class="form-control" name="experience">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
@@ -449,46 +738,66 @@
                 <!-- Step 3: Educational -->
                 <div class="form-step" id="step-3">
                     <h4 class="mb-3">Educational</h4>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Educational Qualification</label>
-                            <select class="form-select" name="education" required>
-                                <option value="">Select</option>
-                                <option value="10th">10th</option>
-                                <option value="12th">12th</option>
-                                <option value="Graduate">Graduate</option>
-                                <option value="Post Graduate">Post Graduate</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Board/University</label>
-                            <input type="text" class="form-control" name="board" required>
+                    <div id="educationContainer">
+                        <div class="education-entry">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label required-field">Educational Qualification</label>
+                                    <select class="form-select" name="education[]" required>
+                                        <option value="">Select</option>
+                                        <option value="10th">10th</option>
+                                        <option value="12th">12th</option>
+                                        <option value="Graduate">Graduate</option>
+                                        <option value="Post Graduate">Post Graduate</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label required-field">Board/University</label>
+                                    <input type="text" class="form-control" name="board[]" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label required-field">Year of Passing</label>
+                                    <input type="text" class="form-control" name="passingYear[]" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label required-field">Percentage/Grade</label>
+                                    <input type="text" class="form-control" name="percentage[]" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label class="form-label required-field">Educational Certificate</label>
+                                    <div class="camera-container" style="width: 50%; margin: 0 auto;">
+                                        <video id="certificateVideo" class="camera-preview"
+                                            style="display: none;"></video>
+                                        <canvas id="certificateCanvas" style="display: none;"></canvas>
+                                        <img id="certificatePreview" class="document-preview" src="#" alt="Certificate"
+                                            style="display:none;" />
+                                        <div class="camera-buttons">
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="startCamera('certificate')">Start Camera</button>
+                                            <button type="button" class="btn btn-success"
+                                                onclick="capturePhoto('certificate')"
+                                                style="display: none;">Capture</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="stopCamera('certificate')" style="display: none;">Stop</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Year of Passing</label>
-                            <input type="text" class="form-control" name="passingYear" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label required-field">Percentage/Grade</label>
-                            <input type="text" class="form-control" name="percentage" required>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label required-field">Signature</label>
-                        <input type="file" class="form-control" name="signatureImage" accept="image/*" id="signatureInput"
-                            required>
-                        <img id="signaturePreview" class="passport-photo-preview" src="#" alt="Signature Preview"
-                            style="display:none; width:180px; height:60px; object-fit:contain; border:2px solid #0072ff; margin-top:10px;" />
-                    </div>
-                    <div class="alert alert-info">
-                        Uniform Details - Shirt, Pant, Belt, Shoes, Cap, Lanyard, Flap, Jersey, Jacket
+                    <div class="text-center mb-4">
+                        <button type="button" class="btn btn-info" onclick="addEducationEntry()">
+                            <i class="fas fa-plus"></i> Add Another Qualification
+                        </button>
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Back</button>
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="button" class="btn btn-primary" onclick="previewForm()">Preview</button>
                     </div>
                 </div>
             </form>
@@ -496,276 +805,42 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Multi-step form navigation
-        function nextStep(current) {
-            document.getElementById('step-' + current).classList.remove('active');
-            document.getElementById('step-' + (current + 1)).classList.add('active');
-            updateProgressBar(current + 1);
-        }
-
-        function prevStep(current) {
-            document.getElementById('step-' + current).classList.remove('active');
-            document.getElementById('step-' + (current - 1)).classList.add('active');
-            updateProgressBar(current - 1);
-        }
-
-        // Passport photo preview
-        const photoInput = document.getElementById('photoInput');
-        const photoPreview = document.getElementById('photoPreview');
-        photoInput.addEventListener('change', function (e) {
-            const [file] = e.target.files;
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (evt) {
-                    photoPreview.src = evt.target.result;
-                    photoPreview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            } else {
-                // If user cancels, hide preview
-                photoPreview.src = '#';
-                photoPreview.style.display = 'none';
-            }
-        });
-
-        // Signature image preview
-        document.getElementById('signatureInput').addEventListener('change', function (e) {
-            const [file] = e.target.files;
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (evt) {
-                    const img = document.getElementById('signaturePreview');
-                    img.src = evt.target.result;
-                    img.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Update progress bar
-        function updateProgressBar(step) {
-            const steps = document.querySelectorAll('.progressbar li');
-            steps.forEach((el, index) => {
-                el.classList.remove('active');
-                if (index < step) {
-                    el.classList.add('active');
-                }
-            });
-        }
-
-        // Validation functions
-        function validateName(name) {
-            return /^[a-zA-Z\s]{2,50}$/.test(name);
-        }
-
-        function validateMobile(mobile) {
-            return /^[6-9]\d{9}$/.test(mobile);
-        }
-
-        function validateAadhaar(aadhaar) {
-            return /^\d{12}$/.test(aadhaar);
-        }
-
-        function validatePAN(pan) {
-            return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(pan);
-        }
-
-        function validateIFSC(ifsc) {
-            return /^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifsc);
-        }
-
-        function validateBankAccount(account) {
-            return /^\d{9,18}$/.test(account);
-        }
-
-        function validatePercentage(percentage) {
-            const value = parseFloat(percentage);
-            return !isNaN(value) && value >= 0 && value <= 100;
-        }
-
-        function validateYear(year) {
-            const currentYear = new Date().getFullYear();
-            const value = parseInt(year);
-            return !isNaN(value) && value >= 1950 && value <= currentYear;
-        }
-
-        // Function to show error message
-        function showError(input, message) {
-            // Find the parent row div
-            const rowDiv = input.closest('.row');
-            // Find the specific column div containing this input
-            const colDiv = input.closest('.col-md-6, .col-md-4');
-            // Create or get the error message div
-            let errorDiv = colDiv.querySelector('.error-message');
-            
-            if (!errorDiv) {
-                errorDiv = document.createElement('div');
-                errorDiv.className = 'error-message';
-                // Insert error message after the input
-                colDiv.appendChild(errorDiv);
-            }
-            
-            errorDiv.textContent = message;
-            input.classList.add('is-invalid');
-        }
-
-        // Function to clear error message
-        function clearError(input) {
-            // Find the specific column div containing this input
-            const colDiv = input.closest('.col-md-6, .col-md-4');
-            const errorDiv = colDiv.querySelector('.error-message');
-            
-            if (errorDiv) {
-                errorDiv.remove();
-            }
-            
-            input.classList.remove('is-invalid');
-        }
-
-        // Add input event listeners for real-time validation
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('recruitmentForm');
-            
-            // Name validation
-            form.name.addEventListener('input', function() {
-                if (!validateName(this.value)) {
-                    showError(this, 'Name should only contain letters and spaces (2-50 characters)');
-                } else {
-                    clearError(this);
-                }
-            });
-
-            // Mobile validation
-            form.mobile1.addEventListener('input', function() {
-                if (!validateMobile(this.value)) {
-                    showError(this, 'Please enter a valid 10-digit mobile number starting with 6-9');
-                } else {
-                    clearError(this);
-                }
-            });
-
-            // Aadhaar validation
-            form.aadhaar.addEventListener('input', function() {
-                if (!validateAadhaar(this.value)) {
-                    showError(this, 'Please enter a valid 12-digit Aadhaar number');
-                } else {
-                    clearError(this);
-                }
-            });
-
-            // PAN validation
-            form.pan.addEventListener('input', function() {
-                if (!validatePAN(this.value)) {
-                    showError(this, 'Please enter a valid PAN number (e.g., ABCDE1234F)');
-                } else {
-                    clearError(this);
-                }
-            });
-
-            // IFSC validation
-            form.ifsc.addEventListener('input', function() {
-                if (!validateIFSC(this.value)) {
-                    showError(this, 'Please enter a valid IFSC code');
-                } else {
-                    clearError(this);
-                }
-            });
-
-            // Bank Account validation
-            form.bankAccount.addEventListener('input', function() {
-                if (!validateBankAccount(this.value)) {
-                    showError(this, 'Please enter a valid bank account number (9-18 digits)');
-                } else {
-                    clearError(this);
-                }
-            });
-
-            // Percentage validation
-            form.percentage.addEventListener('input', function() {
-                if (!validatePercentage(this.value)) {
-                    showError(this, 'Please enter a valid percentage (0-100)');
-                } else {
-                    clearError(this);
-                }
-            });
-
-            // Year validation
-            form.passingYear.addEventListener('input', function() {
-                if (!validateYear(this.value)) {
-                    showError(this, 'Please enter a valid year between 1950 and current year');
-                } else {
-                    clearError(this);
-                }
-            });
-
-            // Date of Birth validation
-            form.dob.addEventListener('input', function() {
-                const dob = new Date(this.value);
-                const today = new Date();
-                const age = today.getFullYear() - dob.getFullYear();
-                
-                if (dob > today) {
-                    showError(this, 'Date of birth cannot be in the future');
-                } else if (age < 18) {
-                    showError(this, 'Age must be at least 18 years');
-                } else {
-                    clearError(this);
-                }
-            });
-
-            // Photo validation
-            form.photo.addEventListener('change', function() {
-                const file = this.files[0];
-                if (file) {
-                    if (!file.type.startsWith('image/')) {
-                        showError(this, 'Please upload an image file');
-                        this.value = '';
-                    } else if (file.size > 5 * 1024 * 1024) { // 5MB limit
-                        showError(this, 'Image size should be less than 5MB');
-                        this.value = '';
-                    } else {
-                        clearError(this);
-                    }
-                }
-            });
-
-            // Signature validation
-            form.signatureImage.addEventListener('change', function() {
-                const file = this.files[0];
-                if (file) {
-                    if (!file.type.startsWith('image/')) {
-                        showError(this, 'Please upload an image file');
-                        this.value = '';
-                    } else if (file.size > 2 * 1024 * 1024) { // 2MB limit
-                        showError(this, 'Image size should be less than 2MB');
-                        this.value = '';
-                    } else {
-                        clearError(this);
-                    }
-                }
-            });
-        });
-
-        // Update validateStep function
-        function validateStep(step) {
+        // Make validation functions globally available
+        window.validateStep = function (step, skipNavigation = false) {
             let valid = true;
             const stepDiv = document.getElementById('step-' + step);
-            const inputs = stepDiv.querySelectorAll('input, select');
-            
+
+            if (!stepDiv) {
+                console.error('Step element not found');
+                return false;
+            }
+
+            const inputs = stepDiv.querySelectorAll('input[required], select[required]');
+            if (!inputs || inputs.length === 0) {
+                console.error('No input elements found in step');
+                return false;
+            }
+
             // Clear all existing errors first
             inputs.forEach(input => {
-                clearError(input);
+                if (input) {
+                    clearError(input);
+                }
             });
-            
+
             inputs.forEach(input => {
+                if (!input) return;
+
                 if (input.hasAttribute('required')) {
                     if (!input.value) {
                         showError(input, 'This field is required');
                         valid = false;
                     } else {
                         // Validate specific fields
-                        switch(input.name) {
+                        switch (input.name) {
                             case 'name':
+                            case 'fatherName':
+                            case 'motherName':
                                 if (!validateName(input.value)) {
                                     showError(input, 'Name should only contain letters and spaces (2-50 characters)');
                                     valid = false;
@@ -777,39 +852,9 @@
                                     valid = false;
                                 }
                                 break;
-                            case 'aadhaar':
-                                if (!validateAadhaar(input.value)) {
-                                    showError(input, 'Please enter a valid 12-digit Aadhaar number');
-                                    valid = false;
-                                }
-                                break;
-                            case 'pan':
-                                if (!validatePAN(input.value)) {
-                                    showError(input, 'Please enter a valid PAN number (e.g., ABCDE1234F)');
-                                    valid = false;
-                                }
-                                break;
-                            case 'ifsc':
-                                if (!validateIFSC(input.value)) {
-                                    showError(input, 'Please enter a valid IFSC code');
-                                    valid = false;
-                                }
-                                break;
-                            case 'bankAccount':
-                                if (!validateBankAccount(input.value)) {
-                                    showError(input, 'Please enter a valid bank account number (9-18 digits)');
-                                    valid = false;
-                                }
-                                break;
-                            case 'percentage':
-                                if (!validatePercentage(input.value)) {
-                                    showError(input, 'Please enter a valid percentage (0-100)');
-                                    valid = false;
-                                }
-                                break;
-                            case 'passingYear':
-                                if (!validateYear(input.value)) {
-                                    showError(input, 'Please enter a valid year between 1950 and current year');
+                            case 'dob':
+                                if (!validateDOB(input.value)) {
+                                    showError(input, 'Age must be between 18 and 60 years');
                                     valid = false;
                                 }
                                 break;
@@ -818,399 +863,640 @@
                 }
             });
 
-            if (valid) {
+            if (valid && !skipNavigation) {
                 nextStep(step);
-            } else {
+            } else if (!valid) {
                 // Scroll to first error
                 const firstError = stepDiv.querySelector('.is-invalid');
                 if (firstError) {
                     firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             }
-        }
 
-        // Optional: Prevent form submit for demo
-        document.getElementById('recruitmentForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            
-            // Create preview section
-            const previewSection = document.createElement('div');
-            previewSection.className = 'preview-section';
-            previewSection.innerHTML = `
-                <h3 class="text-center mb-4">Application Preview</h3>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="preview-row">
-                            <div class="preview-label">Name:</div>
-                            <div class="preview-value">${this.name.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Father's Name:</div>
-                            <div class="preview-value">${this.fatherName.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Mother's Name:</div>
-                            <div class="preview-value">${this.motherName.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Date of Birth:</div>
-                            <div class="preview-value">${this.dob.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Mobile Number:</div>
-                            <div class="preview-value">${this.mobile1.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Marital Status:</div>
-                            <div class="preview-value">${this.maritalStatus.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Nationality:</div>
-                            <div class="preview-value">${this.nationality.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Caste:</div>
-                            <div class="preview-value">${this.caste.value}</div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="preview-row">
-                            <div class="preview-label">Identification Mark:</div>
-                            <div class="preview-value">${this.identificationMark.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Height:</div>
-                            <div class="preview-value">${this.height.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Chest:</div>
-                            <div class="preview-value">${this.chest.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Photo:</div>
-                            <div class="preview-value">
-                                <img src="${document.getElementById('photoPreview').src}" class="preview-photo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <div class="preview-row">
-                            <div class="preview-label">Aadhaar Number:</div>
-                            <div class="preview-value">${this.aadhaar.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">PAN Number:</div>
-                            <div class="preview-value">${this.pan.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Bank Account:</div>
-                            <div class="preview-value">${this.bankAccount.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">IFSC Code:</div>
-                            <div class="preview-value">${this.ifsc.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Bank Name:</div>
-                            <div class="preview-value">${this.bankName.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Bank Branch:</div>
-                            <div class="preview-value">${this.bankBranch.value}</div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="preview-row">
-                            <div class="preview-label">Experience:</div>
-                            <div class="preview-value">${this.experience.value || 'N/A'}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Education:</div>
-                            <div class="preview-value">${this.education.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Board/University:</div>
-                            <div class="preview-value">${this.board.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Year of Passing:</div>
-                            <div class="preview-value">${this.passingYear.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Percentage/Grade:</div>
-                            <div class="preview-value">${this.percentage.value}</div>
-                        </div>
-                        <div class="preview-row">
-                            <div class="preview-label">Signature:</div>
-                            <div class="preview-value">
-                                <img src="${document.getElementById('signaturePreview').src}" class="preview-signature">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center mt-4">
-                    <button class="download-btn" onclick="downloadPDF()">
-                        <i class="fas fa-download"></i> Download Application
-                    </button>
-                    <button class="edit-btn" onclick="editForm()" style="margin-left: 10px; background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
-                        <i class="fas fa-edit"></i> Edit Form
-                    </button>
-                </div>
-            `;
+            return valid;
+        };
 
-            // Add preview section after form
-            this.parentElement.appendChild(previewSection);
-            previewSection.style.display = 'block';
+        // Make navigation functions globally available
+        window.nextStep = function (current) {
+            const currentStep = document.getElementById('step-' + current);
+            const nextStep = document.getElementById('step-' + (current + 1));
 
-            // Hide form
-            this.style.display = 'none';
-        });
-
-        // Function to edit form
-        function editForm() {
-            // Show the form
-            const form = document.getElementById('recruitmentForm');
-            form.style.display = 'block';
-            
-            // Remove preview section
-            const previewSection = document.querySelector('.preview-section');
-            if (previewSection) {
-                previewSection.remove();
+            if (!currentStep || !nextStep) {
+                console.error('Step elements not found');
+                return;
             }
-            
-            // Scroll to top of form
-            form.scrollIntoView({ behavior: 'smooth' });
-        }
 
-        // Function to download PDF
-        async function downloadPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            // Set font styles
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(16);
-            
-            // Add title
-            doc.text("A J Securitas Recruitment Form", 105, 20, { align: "center" });
-            
-            // Reset font for content
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(10);
-            
-            // Get form data
-            const form = document.getElementById('recruitmentForm');
-            const formData = new FormData(form);
-            
-            // Personal Details Section
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(12);
-            doc.text("Personal Details", 20, 35);
-            
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(10);
-            
-            let y = 45;
-            const lineHeight = 7;
-            const leftMargin = 20;
-            const rightMargin = 100;
-            
-            // Personal Information
-            doc.text("Name: " + formData.get('name'), leftMargin, y);
-            doc.text("Father's Name: " + formData.get('fatherName'), rightMargin, y);
-            y += lineHeight;
-            
-            doc.text("Mother's Name: " + formData.get('motherName'), leftMargin, y);
-            doc.text("Date of Birth: " + formData.get('dob'), rightMargin, y);
-            y += lineHeight;
-            
-            doc.text("Mobile Number: " + formData.get('mobile1'), leftMargin, y);
-            doc.text("Marital Status: " + formData.get('maritalStatus'), rightMargin, y);
-            y += lineHeight;
-            
-            doc.text("Nationality: " + formData.get('nationality'), leftMargin, y);
-            doc.text("Caste: " + formData.get('caste'), rightMargin, y);
-            y += lineHeight;
-            
-            doc.text("Identification Mark: " + formData.get('identificationMark'), leftMargin, y);
-            y += lineHeight;
-            
-            doc.text("Height: " + formData.get('height'), leftMargin, y);
-            doc.text("Chest: " + formData.get('chest'), rightMargin, y);
-            y += lineHeight * 2;
-            
-            // Other Details Section
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(12);
-            doc.text("Other Details", 20, y);
-            y += lineHeight;
-            
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(10);
-            
-            doc.text("Aadhaar Number: " + formData.get('aadhaar'), leftMargin, y);
-            doc.text("PAN Number: " + formData.get('pan'), rightMargin, y);
-            y += lineHeight;
-            
-            doc.text("Bank Account: " + formData.get('bankAccount'), leftMargin, y);
-            doc.text("IFSC Code: " + formData.get('ifsc'), rightMargin, y);
-            y += lineHeight;
-            
-            doc.text("Bank Name: " + formData.get('bankName'), leftMargin, y);
-            doc.text("Bank Branch: " + formData.get('bankBranch'), rightMargin, y);
-            y += lineHeight;
-            
-            doc.text("Experience: " + (formData.get('experience') || 'N/A'), leftMargin, y);
-            y += lineHeight * 2;
-            
-            // Educational Details Section
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(12);
-            doc.text("Educational Details", 20, y);
-            y += lineHeight;
-            
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(10);
-            
-            doc.text("Education: " + formData.get('education'), leftMargin, y);
-            doc.text("Board/University: " + formData.get('board'), rightMargin, y);
-            y += lineHeight;
-            
-            doc.text("Year of Passing: " + formData.get('passingYear'), leftMargin, y);
-            doc.text("Percentage/Grade: " + formData.get('percentage'), rightMargin, y);
-            y += lineHeight * 2;
-            
-            // Add photo if available
-            const photoPreview = document.getElementById('photoPreview');
-            if (photoPreview && photoPreview.src) {
-                try {
-                    const photoData = await getBase64FromUrl(photoPreview.src);
-                    doc.addImage(photoData, 'JPEG', leftMargin, y, 30, 40);
-                    doc.text("Photo", leftMargin, y + 45);
-                } catch (error) {
-                    console.error('Error adding photo:', error);
-                }
-            }
-            
-            // Add signature if available
-            const signaturePreview = document.getElementById('signaturePreview');
-            if (signaturePreview && signaturePreview.src) {
-                try {
-                    const signatureData = await getBase64FromUrl(signaturePreview.src);
-                    doc.addImage(signatureData, 'JPEG', rightMargin, y, 40, 20);
-                    doc.text("Signature", rightMargin, y + 25);
-                } catch (error) {
-                    console.error('Error adding signature:', error);
-                }
-            }
-            
-            // Add footer
-            const pageCount = doc.internal.getNumberOfPages();
-            for (let i = 1; i <= pageCount; i++) {
-                doc.setPage(i);
-                doc.setFontSize(8);
-                doc.text(
-                    'Page ' + i + ' of ' + pageCount,
-                    doc.internal.pageSize.width / 2,
-                    doc.internal.pageSize.height - 10,
-                    { align: 'center' }
-                );
-            }
-            
-            // Save the PDF
-            doc.save('application_form.pdf');
-        }
-        
-        // Helper function to convert image URL to base64
-        function getBase64FromUrl(url) {
-            return new Promise((resolve, reject) => {
-                const img = new Image();
-                img.crossOrigin = 'Anonymous';
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0);
-                    const dataURL = canvas.toDataURL('image/jpeg');
-                    resolve(dataURL);
-                };
-                img.onerror = reject;
-                img.src = url;
-            });
-        }
+            currentStep.classList.remove('active');
+            nextStep.classList.add('active');
+            updateProgressBar(current + 1);
+        };
 
-        // Camera capture for passport photo
-        async function openCamera() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { 
-                        facingMode: 'environment',
-                        width: { ideal: 1280 },
-                        height: { ideal: 720 }
-                    } 
+        window.prevStep = function (current) {
+            const currentStep = document.getElementById('step-' + current);
+            const prevStep = document.getElementById('step-' + (current - 1));
+
+            if (currentStep && prevStep) {
+                currentStep.classList.remove('active');
+                prevStep.classList.add('active');
+                updateProgressBar(current - 1);
+            } else {
+                console.error('Step elements not found');
+            }
+        };
+
+        // Update progress bar function
+        function updateProgressBar(step) {
+            const steps = document.querySelectorAll('.progressbar li');
+            if (steps) {
+                steps.forEach((el, index) => {
+                    el.classList.remove('active');
+                    if (index < step) {
+                        el.classList.add('active');
+                    }
                 });
-                
-                // Create video element
-                const video = document.createElement('video');
-                video.srcObject = stream;
-                video.autoplay = true;
-                video.style.width = '100%';
-                video.style.maxWidth = '400px';
-                video.style.borderRadius = '8px';
-                
-                // Create capture button
-                const captureBtn = document.createElement('button');
-                captureBtn.className = 'btn btn-primary mt-2';
-                captureBtn.textContent = 'Capture Photo';
-                
-                // Create container for camera view
-                const cameraContainer = document.createElement('div');
-                cameraContainer.style.textAlign = 'center';
-                cameraContainer.appendChild(video);
-                cameraContainer.appendChild(captureBtn);
-                
-                // Replace the existing button with camera view
-                const photoSection = document.querySelector('input[name="photo"]').parentElement;
-                const oldButton = photoSection.querySelector('button');
-                photoSection.insertBefore(cameraContainer, oldButton);
-                oldButton.style.display = 'none';
-                
-                // Handle photo capture
-                captureBtn.onclick = () => {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = video.videoWidth;
-                    canvas.height = video.videoHeight;
-                    canvas.getContext('2d').drawImage(video, 0, 0);
-                    
-                    // Convert to blob and create file
-                    canvas.toBlob((blob) => {
-                        const file = new File([blob], 'photo.jpg', { type: 'image/jpeg' });
-                        const dataTransfer = new DataTransfer();
-                        dataTransfer.items.add(file);
-                        
-                        // Update file input
-                        const fileInput = document.getElementById('photoInput');
-                        fileInput.files = dataTransfer.files;
-                        
-                        // Show preview
-                        const preview = document.getElementById('photoPreview');
-                        preview.src = URL.createObjectURL(blob);
-                        preview.style.display = 'block';
-                        
-                        // Clean up
-                        stream.getTracks().forEach(track => track.stop());
-                        cameraContainer.remove();
-                        oldButton.style.display = 'block';
-                    }, 'image/jpeg');
-                };
-            } catch (err) {
-                console.error('Error accessing camera:', err);
-                alert('Unable to access camera. Please make sure you have granted camera permissions.');
             }
         }
+
+        // Validation functions
+        function validateName(name) {
+            return /^[a-zA-Z\s]{2,50}$/.test(name.trim());
+        }
+
+        function validateMobile(mobile) {
+            return /^[6-9]\d{9}$/.test(mobile.trim());
+        }
+
+        function validateDOB(dob) {
+            const date = new Date(dob);
+            const today = new Date();
+            const minAge = 18;
+            const maxAge = 60;
+
+            if (isNaN(date.getTime())) return false;
+
+            let age = today.getFullYear() - date.getFullYear();
+            const monthDiff = today.getMonth() - date.getMonth();
+
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < date.getDate())) {
+                age--;
+            }
+
+            return age >= minAge && age <= maxAge;
+        }
+
+        // Function to show error message
+        function showError(input, message) {
+            const colDiv = input.closest('.col-md-6, .col-md-4, .col-12');
+            if (!colDiv) return;
+
+            let errorDiv = colDiv.querySelector('.error-message');
+            if (!errorDiv) {
+                errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                colDiv.appendChild(errorDiv);
+            }
+
+            errorDiv.textContent = message;
+            input.classList.add('is-invalid');
+        }
+
+        // Function to clear error message
+        function clearError(input) {
+            if (!input) return;
+
+            const colDiv = input.closest('.col-md-6, .col-md-4, .col-12');
+            if (!colDiv) return;
+
+            const errorDiv = colDiv.querySelector('.error-message');
+            if (errorDiv) {
+                errorDiv.remove();
+            }
+
+            input.classList.remove('is-invalid');
+        }
+
+        // Make camera functions globally available
+        window.startCamera = async function (type) {
+            try {
+                if (!navigator.mediaDevices?.getUserMedia) {
+                    throw new Error('Your browser does not support camera access. Please use a modern browser like Chrome, Firefox, or Edge.');
+                }
+
+                const video = document.getElementById(`${type}Video`);
+                if (!video) {
+                    throw new Error('Video element not found');
+                }
+
+                // Stop any existing camera
+                if (window.cameraState.currentStream) {
+                    await stopCamera(window.cameraState.currentCamera);
+                }
+
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: 'environment' },
+                    audio: false
+                });
+
+                window.cameraState.currentStream = stream;
+                window.cameraState.currentCamera = type;
+                window.cameraState.isInitialized = true;
+
+                video.srcObject = stream;
+                video.style.display = 'block';
+
+                // Show capture button
+                const captureBtn = video.parentElement.querySelector('.btn-success');
+                if (captureBtn) captureBtn.style.display = 'inline-block';
+
+                await video.play();
+
+            } catch (err) {
+                console.error('Camera access error:', err);
+                alert('Unable to access camera: ' + err.message);
+                await stopCamera(type);
+            }
+        };
+
+        window.stopCamera = async function (type) {
+            try {
+                if (window.cameraState.currentStream) {
+                    const tracks = window.cameraState.currentStream.getTracks();
+                    tracks.forEach(track => track.stop());
+                }
+
+                const video = document.getElementById(`${type}Video`);
+                if (video) {
+                    video.srcObject = null;
+                    video.style.display = 'none';
+                }
+
+                window.cameraState.currentStream = null;
+                window.cameraState.currentCamera = null;
+                window.cameraState.isInitialized = false;
+            } catch (err) {
+                console.error('Error stopping camera:', err);
+            }
+        };
+
+        window.capturePhoto = function (type) {
+            try {
+                if (!window.cameraState.isInitialized || !window.cameraState.currentStream) {
+                    throw new Error('Camera is not active. Please start the camera first.');
+                }
+
+                const video = document.getElementById(`${type}Video`);
+                const canvas = document.getElementById(`${type}Canvas`);
+                const preview = document.getElementById(`${type}Preview`);
+
+                if (!video || !canvas || !preview) {
+                    throw new Error('Required elements not found');
+                }
+
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+
+                const context = canvas.getContext('2d');
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                preview.src = canvas.toDataURL('image/jpeg', 0.8);
+                preview.style.display = 'block';
+
+                // Hide the capture button after capturing
+                const captureBtn = video.parentElement.querySelector('.btn-success');
+                if (captureBtn) captureBtn.style.display = 'none';
+
+                stopCamera(type);
+            } catch (err) {
+                console.error('Photo capture error:', err);
+                alert('Error capturing photo: ' + err.message);
+            }
+        };
+
+        // Initialize camera state
+        window.cameraState = {
+            currentStream: null,
+            currentCamera: null,
+            isInitialized: false
+        };
+
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Multi-step form navigation
+            function nextStep(current) {
+                document.getElementById('step-' + current).classList.remove('active');
+                document.getElementById('step-' + (current + 1)).classList.add('active');
+                updateProgressBar(current + 1);
+            }
+
+            function prevStep(current) {
+                document.getElementById('step-' + current).classList.remove('active');
+                document.getElementById('step-' + (current - 1)).classList.add('active');
+                updateProgressBar(current - 1);
+            }
+
+            // Make navigation functions globally available
+            window.nextStep = nextStep;
+            window.prevStep = prevStep;
+
+            // Passport photo preview
+            const photoInput = document.getElementById('photoInput');
+            const photoPreview = document.getElementById('photoPreview');
+
+            if (photoInput && photoPreview) {
+                photoInput.addEventListener('change', function (e) {
+                    const [file] = e.target.files;
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (evt) {
+                            photoPreview.src = evt.target.result;
+                            photoPreview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        // If user cancels, hide preview
+                        photoPreview.src = '#';
+                        photoPreview.style.display = 'none';
+                    }
+                });
+            }
+
+            // Signature image preview
+            const signatureInput = document.getElementById('signatureInput');
+            const signaturePreview = document.getElementById('signaturePreview');
+
+            if (signatureInput && signaturePreview) {
+                signatureInput.addEventListener('change', function (e) {
+                    const [file] = e.target.files;
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (evt) {
+                            signaturePreview.src = evt.target.result;
+                            signaturePreview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+
+            // Update progress bar
+            function updateProgressBar(step) {
+                const steps = document.querySelectorAll('.progressbar li');
+                steps.forEach((el, index) => {
+                    el.classList.remove('active');
+                    if (index < step) {
+                        el.classList.add('active');
+                    }
+                });
+            }
+
+            // Make functions globally available
+            window.addEducationEntry = function () {
+                const container = document.getElementById('educationContainer');
+                const newEntry = document.createElement('div');
+                newEntry.className = 'education-entry';
+                newEntry.innerHTML = `
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-danger btn-sm" onclick="removeEducationEntry(this)">
+                            <i class="fas fa-times"></i> Remove
+                        </button>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label required-field">Educational Qualification</label>
+                            <select class="form-select" name="education[]" required>
+                                <option value="">Select</option>
+                                <option value="10th">10th</option>
+                                <option value="12th">12th</option>
+                                <option value="Graduate">Graduate</option>
+                                <option value="Post Graduate">Post Graduate</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required-field">Board/University</label>
+                            <input type="text" class="form-control" name="board[]" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label required-field">Year of Passing</label>
+                            <input type="text" class="form-control" name="passingYear[]" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required-field">Percentage/Grade</label>
+                            <input type="text" class="form-control" name="percentage[]" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label class="form-label required-field">Educational Certificate</label>
+                            <div class="camera-container" style="width: 50%; margin: 0 auto;">
+                                <video id="certificate${container.children.length}Video" class="camera-preview" style="display: none;"></video>
+                                <canvas id="certificate${container.children.length}Canvas" style="display: none;"></canvas>
+                                <img id="certificate${container.children.length}Preview" class="document-preview" src="#" alt="Certificate" style="display:none;" />
+                                <div class="camera-buttons">
+                                    <button type="button" class="btn btn-primary" onclick="startCamera('certificate${container.children.length}')">Start Camera</button>
+                                    <button type="button" class="btn btn-success" onclick="capturePhoto('certificate${container.children.length}')" style="display: none;">Capture</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(newEntry);
+            };
+
+            window.removeEducationEntry = function (button) {
+                button.closest('.education-entry').remove();
+            };
+
+            window.previewForm = function () {
+                // Validate the current step without navigation
+                if (!validateStep(3, true)) {
+                    return;
+                }
+
+                const form = document.getElementById('recruitmentForm');
+                if (!form) {
+                    console.error('Form not found');
+                    return;
+                }
+
+                const formData = new FormData(form);
+
+                // Hide the form
+                form.style.display = 'none';
+
+                // Create preview section
+                const previewSection = document.createElement('div');
+                previewSection.className = 'preview-section';
+                previewSection.style.display = 'block';
+
+                // Helper function to get document preview
+                const getDocumentPreview = (id) => {
+                    const element = document.getElementById(id);
+                    return element && element.style.display !== 'none' ? element.src : '';
+                };
+
+                // Get all education entries
+                const educationEntries = document.querySelectorAll('.education-entry');
+                let educationHTML = '';
+                educationEntries.forEach((entry, index) => {
+                    const education = entry.querySelector('[name="education[]"]');
+                    const board = entry.querySelector('[name="board[]"]');
+                    const year = entry.querySelector('[name="passingYear[]"]');
+                    const percentage = entry.querySelector('[name="percentage[]"]');
+
+                    if (education && board && year && percentage) {
+                        educationHTML += `
+                            <div class="preview-row">
+                                <div class="preview-label">Education ${index + 1}:</div>
+                                <div class="preview-value">
+                                    Qualification: ${education.value}<br>
+                                    Board/University: ${board.value}<br>
+                                    Year of Passing: ${year.value}<br>
+                                    Percentage/Grade: ${percentage.value}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                previewSection.innerHTML = `
+                    <h3 class="text-center mb-4">Application Preview</h3>
+                    <div class="section-title">Personal Information</div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="preview-row">
+                                <div class="preview-label">Name:</div>
+                                <div class="preview-value">${formData.get('name')}</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="preview-label">Father's Name:</div>
+                                <div class="preview-value">${formData.get('fatherName')}</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="preview-label">Mother's Name:</div>
+                                <div class="preview-value">${formData.get('motherName')}</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="preview-label">Date of Birth:</div>
+                                <div class="preview-value">${formData.get('dob')}</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="preview-label">Mobile Number:</div>
+                                <div class="preview-value">${formData.get('mobile1')}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="preview-row">
+                                <div class="preview-label">Marital Status:</div>
+                                <div class="preview-value">${formData.get('maritalStatus')}</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="preview-label">Nationality:</div>
+                                <div class="preview-value">${formData.get('nationality')}</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="preview-label">Caste:</div>
+                                <div class="preview-value">${formData.get('caste')}</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="preview-label">Photo:</div>
+                                <div class="preview-value">
+                                    <img src="${getDocumentPreview('photoPreview')}" class="preview-photo">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">Physical Details</div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="preview-row">
+                                <div class="preview-label">Identification Mark:</div>
+                                <div class="preview-value">${formData.get('identificationMark')}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="preview-row">
+                                <div class="preview-label">Height:</div>
+                                <div class="preview-value">${formData.get('height')}</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="preview-label">Chest:</div>
+                                <div class="preview-value">${formData.get('chest')}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">Document Details</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="preview-row">
+                                <div class="preview-label">Aadhaar Number:</div>
+                                <div class="preview-value">${formData.get('aadhaar')}</div>
+                            </div>
+                             <div class="preview-row">
+                                <div class="preview-label">Documents:</div>
+                                <div class="preview-value">
+                                    <div class="preview-document-container">
+                                        <div class="preview-document-label">Aadhaar Front:</div>
+                                        <img src="${getDocumentPreview('aadhaarFrontPreview')}" class="preview-document">
+                                    </div>
+                                    <div class="preview-document-container">
+                                        <div class="preview-document-label">Aadhaar Back:</div>
+                                        <img src="${getDocumentPreview('aadhaarBackPreview')}" class="preview-document">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                                                        <div class="preview-row">
+                                <div class="preview-label">PAN Number:</div>
+                                <div class="preview-value">${formData.get('pan')}</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="preview-label">Documents:</div>
+                                <div class="preview-value">
+                                    <div class="preview-document-container">
+                                        <div class="preview-document-label">PAN Card:</div>
+                                        <img src="${getDocumentPreview('panPreview')}" class="preview-document">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">Bank Details</div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="preview-row">
+                                <div class="preview-label">Bank Account:</div>
+                                <div class="preview-value">${formData.get('bankAccount')}</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="preview-label">IFSC Code:</div>
+                                <div class="preview-value">${formData.get('ifsc')}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="preview-row">
+                                <div class="preview-label">Bank Name:</div>
+                                <div class="preview-value">${formData.get('bankName')}</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="preview-label">Bank Branch:</div>
+                                <div class="preview-value">${formData.get('bankBranch')}</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="preview-label">Bank Passbook:</div>
+                                <div class="preview-value">
+                                    <img src="${getDocumentPreview('passbookPreview')}" class="preview-document">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">Educational Qualifications</div>
+                    <div class="row">
+                        <div class="col-12">
+                            ${educationHTML}
+                        </div>
+                    </div>
+
+                    <div class="preview-buttons">
+                        <button class="btn btn-primary" onclick="downloadPDF()">
+                            <i class="fas fa-download"></i> Download Application
+                        </button>
+                        <button class="btn btn-secondary" onclick="editForm()">
+                            <i class="fas fa-edit"></i> Edit Form
+                        </button>
+                        <button class="btn btn-success" onclick="submitForm()">
+                            <i class="fas fa-paper-plane"></i> Submit Application
+                        </button>
+                    </div>
+                `;
+
+                form.parentElement.appendChild(previewSection);
+            };
+
+            // Add edit form function
+            window.editForm = function () {
+                const previewSection = document.querySelector('.preview-section');
+                const form = document.getElementById('recruitmentForm');
+
+                if (previewSection && form) {
+                    previewSection.remove();
+                    form.style.display = 'block';
+                }
+            };
+
+            // Add submit form function
+            window.submitForm = function () {
+                // Add your form submission logic here
+                alert('Form submitted successfully!');
+            };
+
+            // Add download PDF function
+            window.downloadPDF = async function () {
+                try {
+                    const { jsPDF } = window.jspdf;
+                    const doc = new jsPDF('p', 'mm', 'a4');
+                    const previewSection = document.querySelector('.preview-section');
+
+                    if (!previewSection) {
+                        throw new Error('Preview section not found');
+                    }
+
+                    // Add header
+                    doc.setFontSize(24);
+                    doc.setTextColor(0, 114, 255); // #0072ff
+                    doc.text('A J Securitas Recruitment Form', 105, 20, { align: 'center' });
+
+                    // Add timestamp
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    const now = new Date();
+                    doc.text(`Generated on: ${now.toLocaleString()}`, 105, 30, { align: 'center' });
+
+                    // Add a line
+                    doc.setDrawColor(0, 114, 255);
+                    doc.setLineWidth(0.5);
+                    doc.line(20, 35, 190, 35);
+
+                    // Convert preview section to canvas
+                    const canvas = await html2canvas(previewSection, {
+                        scale: 2,
+                        useCORS: true,
+                        logging: false,
+                        backgroundColor: '#ffffff'
+                    });
+
+                    // Add the preview section as image
+                    const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                    const pdfWidth = doc.internal.pageSize.getWidth();
+                    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+                    doc.addImage(imgData, 'JPEG', 10, 40, pdfWidth - 20, pdfHeight - 20);
+
+                    // Add footer
+                    const pageCount = doc.internal.getNumberOfPages();
+                    for (let i = 1; i <= pageCount; i++) {
+                        doc.setPage(i);
+                        doc.setFontSize(10);
+                        doc.setTextColor(100);
+                        doc.text(`Page ${i} of ${pageCount}`, 105, 285, { align: 'center' });
+                    }
+
+                    // Save the PDF
+                    doc.save('recruitment-form.pdf');
+                } catch (error) {
+                    console.error('Error generating PDF:', error);
+                    alert('Error generating PDF. Please try again.');
+                }
+            };
+        });
     </script>
 </body>
 
