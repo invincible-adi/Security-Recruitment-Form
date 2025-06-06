@@ -1246,6 +1246,13 @@
                     const year = entry.querySelector('[name="passingYear[]"]');
                     const percentage = entry.querySelector('[name="percentage[]"]');
 
+                    // Try to get the correct certificate preview image for this entry
+                    let certImgId = 'certificatePreview';
+                    if (index > 0) {
+                        certImgId = `certificate${index}Preview`;
+                    }
+                    const certImgSrc = getDocumentPreview(certImgId);
+
                     if (education && board && year && percentage) {
                         educationHTML += `
                             <div class="preview-row">
@@ -1254,7 +1261,9 @@
                                     Qualification: ${education.value}<br>
                                     Board/University: ${board.value}<br>
                                     Year of Passing: ${year.value}<br>
-                                    Percentage/Grade: ${percentage.value}
+                                    Percentage/Grade: ${percentage.value}<br>
+                                    <div class="preview-document-label">Certificate:</div>
+                                    ${certImgSrc ? `<img src="${certImgSrc}" class="preview-document">` : '<span style="color:#888">No certificate image</span>'}
                                 </div>
                             </div>
                         `;
@@ -1443,53 +1452,239 @@
                 try {
                     const { jsPDF } = window.jspdf;
                     const doc = new jsPDF('p', 'mm', 'a4');
-                    const previewSection = document.querySelector('.preview-section');
+                    let y = 20;
+                    const lineHeight = 8;
+                    const col1X = 20;
+                    const valueX = 60;
+                    const maxY = 270;
+                    const pageWidth = 190;
+                    const sectionBgColor = [224, 234, 252];
+                    const rowBgColor = [245, 249, 255];
 
-                    if (!previewSection) {
-                        throw new Error('Preview section not found');
-                    }
-
-                    // Add header
-                    doc.setFontSize(24);
-                    doc.setTextColor(0, 114, 255); // #0072ff
-                    doc.text('A J Securitas Recruitment Form', 105, 20, { align: 'center' });
-
-                    // Add timestamp
+                    // --- PDF Heading ---
+                    // Header (move to very top)
+                    doc.setFontSize(22);
+                    doc.setTextColor(0, 114, 255);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('A J Securitas Recruitment Form', 105, y, { align: 'center' });
+                    y += 12;
                     doc.setFontSize(10);
                     doc.setTextColor(100);
-                    const now = new Date();
-                    doc.text(`Generated on: ${now.toLocaleString()}`, 105, 30, { align: 'center' });
-
-                    // Add a line
+                    doc.setFont(undefined, 'normal');
+                    doc.text(`Generated on: ${new Date().toLocaleString()}`, 105, y, { align: 'center' });
+                    y += 10;
                     doc.setDrawColor(0, 114, 255);
                     doc.setLineWidth(0.5);
-                    doc.line(20, 35, 190, 35);
+                    doc.line(10, y, pageWidth - 10, y);
+                    y += 5;
+                    doc.setTextColor(0, 0, 0);
 
-                    // Convert preview section to canvas
-                    const canvas = await html2canvas(previewSection, {
-                        scale: 2,
-                        useCORS: true,
-                        logging: false,
-                        backgroundColor: '#ffffff'
-                    });
+                    // FIX: Define previewSection at the top so all helpers can use it
+                    const previewSection = document.querySelector('.preview-section');
+                    if (!previewSection) throw new Error('Preview section not found');
 
-                    // Add the preview section as image
-                    const imgData = canvas.toDataURL('image/jpeg', 1.0);
-                    const pdfWidth = doc.internal.pageSize.getWidth();
-                    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+                    // Helper: add section header
+                    function addSectionHeader(text) {
+                        if (y + lineHeight > maxY) { doc.addPage(); y = 20; }
+                        doc.setFillColor(...sectionBgColor);
+                        doc.rect(10, y - 3, pageWidth - 20, lineHeight + 2, 'F');
+                        doc.setFontSize(14);
+                        doc.setFont(undefined, 'bold');
+                        doc.setTextColor(0, 114, 255);
+                        doc.text(text, 15, y + 4);
+                        y += lineHeight + 2;
+                        doc.setTextColor(0, 0, 0);
+                    }
 
-                    doc.addImage(imgData, 'JPEG', 10, 40, pdfWidth - 20, pdfHeight - 20);
+                    // Helper: add a label/value row
+                    function addRow(label, value, isAlt) {
+                        if (y + lineHeight > maxY) { doc.addPage(); y = 20; }
+                        if (isAlt) {
+                            doc.setFillColor(...rowBgColor);
+                            doc.rect(10, y - 2, pageWidth - 20, lineHeight + 2, 'F');
+                        }
+                        doc.setFontSize(11);
+                        doc.setFont(undefined, 'bold');
+                        doc.text(label + ':', col1X, y + 4);
+                        doc.setFont(undefined, 'normal');
+                        doc.text(value, valueX, y + 4);
+                        y += lineHeight + 2;
+                    }
 
-                    // Add footer
+                    // Helper: add a centered image with label
+                    function addImage(label, imgSrc, width = 50, height = 35) {
+                        if (!imgSrc) return;
+                        if (y + height + 10 > maxY) { doc.addPage(); y = 20; }
+                        doc.setFontSize(11);
+                        doc.setFont(undefined, 'bold');
+                        doc.text(label, 105, y + 4, { align: 'center' });
+                        y += 6;
+                        doc.addImage(imgSrc, 'JPEG', 80, y, width, height);
+                        y += height + 6;
+                    }
+
+                    // Helper: add multiple images in a row with their labels
+                    function addImages(label, images) {
+                        if (!images || !images.length) return;
+                        if (y + 45 > maxY) { doc.addPage(); y = 20; }
+                        doc.setFontSize(11);
+                        doc.setFont(undefined, 'bold');
+                        doc.text(label, 15, y + 4);
+                        let imgX = 60;
+                        images.forEach(imgObj => {
+                            doc.setFont(undefined, 'normal');
+                            doc.text(imgObj.label, imgX, y + 4);
+                            doc.addImage(imgObj.src, 'JPEG', imgX, y + 8, 35, 25);
+                            imgX += 45;
+                        });
+                        y += 35;
+                    }
+
+                    // Helper: extract all rows (label, value, img) from a section
+                    function extractRows(section) {
+                        const rows = [];
+                        section.querySelectorAll('.preview-row').forEach(row => {
+                            const label = row.querySelector('.preview-label')?.textContent?.trim() || '';
+                            const valueDiv = row.querySelector('.preview-value');
+                            let value = '';
+                            let imgs = [];
+                            if (valueDiv) {
+                                // Find all images in the valueDiv
+                                const imgEls = valueDiv.querySelectorAll('img');
+                                imgEls.forEach(imgEl => {
+                                    if (imgEl && imgEl.src && imgEl.style.display !== 'none') {
+                                        // Try to get a label for each image
+                                        let imgLabel = imgEl.closest('.preview-document-container')?.querySelector('.preview-document-label')?.textContent?.trim() || label;
+                                        imgs.push({ label: imgLabel, src: imgEl.src });
+                                    }
+                                });
+                                // If no images, just get the text
+                                if (!imgs.length) {
+                                    value = valueDiv.innerText.replace(/\n+/g, ' ').trim();
+                                }
+                            }
+                            rows.push({ label, value, imgs });
+                        });
+                        return rows;
+                    }
+
+                    // Extract education entries from the preview summary
+                    function extractEducationEntriesFromPreview() {
+                        const entries = [];
+                        // Find the education section in the preview
+                        const educationSection = Array.from(previewSection.querySelectorAll('.section-title'))
+                            .find(el => el.textContent.trim().toLowerCase().includes('education'));
+                        if (!educationSection) return entries;
+                        // The next sibling .row contains the education HTML
+                        let row = educationSection.nextElementSibling;
+                        if (!row || !row.classList.contains('row')) return entries;
+                        // Each .preview-row in this row is an education entry
+                        const eduRows = row.querySelectorAll('.preview-row');
+                        eduRows.forEach(eduRow => {
+                            const valueDiv = eduRow.querySelector('.preview-value');
+                            if (!valueDiv) return;
+                            // Extract details from the valueDiv's innerHTML
+                            // Use regex or DOM parsing to get each field
+                            const html = valueDiv.innerHTML;
+                            // Use DOM parsing for robustness
+                            const tempDiv = document.createElement('div');
+                            tempDiv.innerHTML = html;
+                            const text = tempDiv.textContent;
+                            // Try to extract fields
+                            const qualification = /Qualification:\s*([^\n<]*)/i.exec(text)?.[1]?.trim() || '';
+                            const board = /Board\/University:\s*([^\n<]*)/i.exec(text)?.[1]?.trim() || '';
+                            const year = /Year of Passing:\s*([^\n<]*)/i.exec(text)?.[1]?.trim() || '';
+                            const percentage = /Percentage\/Grade:\s*([^\n<]*)/i.exec(text)?.[1]?.trim() || '';
+                            // Find only the first certificate image
+                            const certImg = tempDiv.querySelector('img')?.src || '';
+                            entries.push({ qualification, board, year, percentage, certificateImg: certImg });
+                        });
+                        return entries;
+                    }
+
+                    // Helper: add a box for education entry
+                    function addEducationBox(edu) {
+                        if (y + 55 > maxY) { doc.addPage(); y = 20; }
+                        let boxY = y + 10;
+                        doc.setFontSize(11);
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Qualification:', 20, boxY);
+                        doc.setFont(undefined, 'normal');
+                        doc.text(edu.qualification, 50, boxY);
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Board/University:', 100, boxY);
+                        doc.setFont(undefined, 'normal');
+                        doc.text(edu.board, 140, boxY);
+                        boxY += 8;
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Year of Passing:', 20, boxY);
+                        doc.setFont(undefined, 'normal');
+                        doc.text(edu.year, 50, boxY);
+                        boxY += 8;
+                        doc.setFont(undefined, 'bold');
+                        doc.text('Percentage/Grade:', 100, boxY);
+                        doc.setFont(undefined, 'normal');
+                        doc.text(edu.percentage, 140, boxY);
+                        boxY += 10;
+                        if (edu.certificateImg) {
+                            doc.setFont(undefined, 'bold');
+                            doc.text('Certificate:', 20, boxY);
+                            // Center the image in the box
+                            const imgWidth = 50;
+                            const imgHeight = 35;
+                            const imgX = 15 + ((pageWidth - 30) - imgWidth) / 2;
+                            doc.addImage(edu.certificateImg, 'JPEG', imgX, boxY + 2, imgWidth, imgHeight);
+                        }
+                        y += 55;
+                    }
+
+                    // Render all sections
+                    let isAlt = false;
+                    const sections = Array.from(previewSection.querySelectorAll('.section-title, .row'));
+                    for (let i = 0; i < sections.length; i++) {
+                        const section = sections[i];
+                        // Skip the education section here; it will be rendered in boxed format below
+                        if (section.classList.contains('section-title') && section.textContent.trim().toLowerCase().includes('education')) {
+                            // Also skip the next .row (education details)
+                            i++;
+                            continue;
+                        }
+                        if (section.classList.contains('section-title')) {
+                            addSectionHeader(section.textContent.trim());
+                            isAlt = false;
+                        } else if (section.classList.contains('row')) {
+                            const rows = extractRows(section);
+                            for (const row of rows) {
+                                if (row.imgs && row.imgs.length > 1) {
+                                    addImages(row.label, row.imgs);
+                                } else if (row.imgs && row.imgs.length === 1) {
+                                    addImage(row.imgs[0].label, row.imgs[0].src);
+                                } else {
+                                    addRow(row.label, row.value, isAlt);
+                                    isAlt = !isAlt;
+                                }
+                            }
+                        }
+                    }
+
+                    // Education section (boxed)
+                    const educationEntries = extractEducationEntriesFromPreview();
+                    if (educationEntries.length) {
+                        addSectionHeader('Educational Qualifications');
+                        for (const edu of educationEntries) {
+                            addEducationBox(edu);
+                        }
+                    }
+
+                    // Footer with page numbers
                     const pageCount = doc.internal.getNumberOfPages();
                     for (let i = 1; i <= pageCount; i++) {
                         doc.setPage(i);
                         doc.setFontSize(10);
                         doc.setTextColor(100);
-                        doc.text(`Page ${i} of ${pageCount}`, 105, 285, { align: 'center' });
+                        doc.text(`Page ${i} of ${pageCount}`, 105, 290, { align: 'center' });
                     }
 
-                    // Save the PDF
                     doc.save('recruitment-form.pdf');
                 } catch (error) {
                     console.error('Error generating PDF:', error);
